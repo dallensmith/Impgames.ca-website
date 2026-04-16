@@ -65,12 +65,12 @@ export async function GET() {
         zip.file("metadata.xml", xml);
 
         const zipBlob = await zip.generateAsync({ 
-            type: "uint8array",
+            type: "blob",
             compression: "DEFLATE",
             compressionOptions: { level: 6 }
         });
 
-        return new NextResponse(zipBlob, {
+        return new NextResponse(zipBlob as any, {
             headers: {
                 "Content-Type": "application/zip",
                 "Content-Disposition": `attachment; filename="impgames_media_backup_${new Date().toISOString().split('T')[0]}.zip"`,
