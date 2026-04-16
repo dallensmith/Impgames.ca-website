@@ -4,7 +4,9 @@ import * as schema from "./schema";
 
 let sqlite;
 try {
-    sqlite = new Database(process.env.DATABASE_URL || "sqlite.db");
+    const isProd = process.env.NODE_ENV === "production";
+    const defaultPath = isProd ? "/data/sqlite.db" : "sqlite.db";
+    sqlite = new Database(process.env.DATABASE_URL || defaultPath);
 } catch (e) {
     console.warn("Notice: Using in-memory database fallback.");
     sqlite = new Database(":memory:");
