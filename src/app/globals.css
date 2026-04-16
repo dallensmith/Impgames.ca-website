@@ -623,6 +623,25 @@ button:active, .button:active {
     text-align: center;
 }
 
+/* Admin Media Library Grid */
+.media-library .gallery-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 2rem !important;
+}
+
+@media (max-width: 1200px) {
+    .media-library .gallery-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .media-library .gallery-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
 /* Admin Layout Styles */
 .admin-container {
     min-height: 100vh;

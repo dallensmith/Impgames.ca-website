@@ -24,11 +24,7 @@ export default async function MediaLibraryPage() {
                 Media Library
             </h2>
             
-            <div className="gallery-grid" style={{ 
-                display: 'grid', 
-                gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
-                gap: '3rem' 
-            }}>
+            <div className="gallery-grid">
                 {images.map(img => (
                     <div key={img.id} className="admin-card" style={{ padding: '1rem', display: 'flex', flexDirection: 'column' }}>
                         <div style={{ position: 'relative', aspectRatio: '4/3', border: '3px solid #000', marginBottom: '1rem', background: '#000', overflow: 'hidden' }}>
