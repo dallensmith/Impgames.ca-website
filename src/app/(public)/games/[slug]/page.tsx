@@ -54,7 +54,7 @@ export default async function SingleGamePage({ params }: { params: { slug: strin
                                                     <span style={{ fontSize: '1.2rem', fontFamily: 'var(--font-jersey)', display: 'block' }}>VERSION {v.versionNumber}</span>
                                                     {v.releaseDate && <span style={{ fontSize: '0.8rem', opacity: 0.6 }}>Released: {v.releaseDate}</span>}
                                                 </div>
-                                                <a href={v.zipUrl} className="button" style={{ fontSize: '0.8rem', padding: '0.5rem 1rem', margin: 0 }}>
+                                                <a href={v.zipUrl || undefined} className="button" style={{ fontSize: '0.8rem', padding: '0.5rem 1rem', margin: 0 }}>
                                                     DOWNLOAD .ZIP
                                                 </a>
                                             </div>
@@ -67,7 +67,7 @@ export default async function SingleGamePage({ params }: { params: { slug: strin
                                         </div>
                                     ))
                                 ) : (
-                                    <a href={game.zipUrl} className="button" style={{ textAlign: 'center' }}>
+                                    <a href={game.zipUrl || undefined} className="button" style={{ textAlign: 'center' }}>
                                         DOWNLOAD LATEST (.ZIP)
                                     </a>
                                 )}
