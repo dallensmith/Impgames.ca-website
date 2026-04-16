@@ -433,6 +433,150 @@ button:active, .button:active {
     white-space: pre-wrap;
 }
 
+/* Main Public Footer - Redesigned for "The Lab" Industrial Theme */
+.main-footer {
+    margin-top: 4rem;
+    padding: 2.5rem 2rem 1.5rem;
+    background-color: #0f0a05;
+    background-image: var(--bg-texture);
+    background-blend-mode: multiply;
+    background-size: cover;
+    color: #bfa68a;
+    font-family: var(--font-jersey);
+    position: relative;
+    border-top: 8px solid #000;
+}
+
+/* Industrial Safety Stripe Ribbon */
+.main-footer::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: repeating-linear-gradient(
+        45deg,
+        var(--primary),
+        var(--primary) 20px,
+        #000 20px,
+        #000 40px
+    );
+    z-index: 20;
+}
+
+.footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2.5rem;
+    text-align: left;
+}
+
+.footer-section h4 {
+    font-family: var(--font-bowlby);
+    color: var(--primary);
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.footer-section h4::before {
+    content: "◢";
+    font-size: 0.6rem;
+    color: var(--background);
+}
+
+.footer-tech-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-tech-list li {
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed rgba(255,255,255,0.08);
+    padding-bottom: 0.3rem;
+    letter-spacing: 0.5px;
+}
+
+.tech-label {
+    opacity: 0.5;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-family: var(--font-inter);
+}
+
+.tech-value {
+    color: var(--background); /* Bright Ochre */
+    font-weight: bold;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.footer-links a {
+    color: #bfa68a;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+    display: inline-block;
+    padding: 0.1rem 0;
+}
+
+.footer-links a:hover {
+    color: #fff;
+    transform: translateX(3px);
+}
+
+.footer-links a::before {
+    content: "→";
+    margin-right: 6px;
+    opacity: 0.3;
+}
+
+.footer-bottom {
+    max-width: 900px;
+    margin: 2rem auto 0;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
+
+.footer-legal-links {
+    display: flex;
+    gap: 0rem;
+}
+
+.footer-legal-links a {
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    font-size: 0.8rem;
+    margin-left: 1.2rem;
+    text-transform: uppercase;
+}
+
+.footer-legal-links a:hover {
+    color: #fff;
+}
+
 /* Admin Status Badges */
 .status-badge {
     padding: 4px 12px;

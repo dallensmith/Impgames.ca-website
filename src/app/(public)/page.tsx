@@ -39,8 +39,20 @@ export default async function HomePage() {
                 {featuredGames.length === 0 && (
                     <p style={{ textAlign: 'center', opacity: 0.5 }}>No games released yet. Stay tuned!</p>
                 )}
-                <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-                    <Link href="/games" className="button" style={{ display: 'inline-block', padding: '1rem 2rem', background: '#000', color: '#fff', textDecoration: 'none' }}>
+                <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+                    <Link href="/games" className="button" style={{ 
+                        display: 'inline-block', 
+                        padding: '1.2rem 3rem', 
+                        background: 'var(--primary)', 
+                        color: '#fff', 
+                        textDecoration: 'none',
+                        fontFamily: 'var(--font-bowlby)',
+                        fontSize: '1.1rem',
+                        border: '6px solid #000',
+                        boxShadow: '8px 8px 0 rgba(0,0,0,0.15)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1px'
+                    }}>
                         View All Games
                     </Link>
                 </div>

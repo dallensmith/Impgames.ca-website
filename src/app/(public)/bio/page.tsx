@@ -1,4 +1,5 @@
 import { getSettings } from "@/lib/data";
+import { formatSocialUrl } from "@/lib/social";
 
 export default async function BioPage() {
     const settings = await getSettings();
@@ -50,7 +51,7 @@ export default async function BioPage() {
                             </p>
                         </div>
 
-                        {settings.social_links && (() => {
+                        {settings.show_social_bio !== 'false' && settings.social_links && (() => {
                             let links = [];
                             try {
                                 const parsed = JSON.parse(settings.social_links);
@@ -64,21 +65,7 @@ export default async function BioPage() {
 
                             if (links.length === 0) return null;
 
-                            const formatUrl = (url: string, platform: string) => {
-                                if (!url) return "#";
-                                if (url.startsWith('http') || url.startsWith('mailto:')) return url;
-                                
-                                const handle = url.replace('@', '');
-                                switch (platform) {
-                                    case 'twitter': return `https://twitter.com/${handle}`;
-                                    case 'github': return `https://github.com/${handle}`;
-                                    case 'youtube': return `https://youtube.com/${url.startsWith('@') ? url : '@' + handle}`;
-                                    case 'bluesky': return `https://bsky.app/profile/${handle}`;
-                                    case 'itch': return `https://${handle}.itch.io`;
-                                    case 'patreon': return `https://patreon.com/${handle}`;
-                                    default: return url.includes('.') ? `https://${url}` : url;
-                                }
-                            };
+
 
                             return (
                                 <div style={{ marginTop: '3rem', textAlign: 'center' }}>
@@ -87,7 +74,7 @@ export default async function BioPage() {
                                         {links.map((link: any, i: number) => (
                                             <a 
                                                 key={i} 
-                                                href={formatUrl(link.url, link.platform)} 
+                                                href={formatSocialUrl(link.url, link.platform)} 
                                                 target="_blank" 
                                                 rel="noopener noreferrer" 
                                                 style={{ 

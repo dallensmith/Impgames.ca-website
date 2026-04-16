@@ -59,10 +59,7 @@ export default async function AdminLayout({
                 {children}
             </main>
 
-            <footer className="admin-footer">
-                <p style={{ opacity: 0.6, fontSize: '0.8rem', marginBottom: '1rem' }}>Admin Session: <strong>{session.user.email}</strong></p>
-                <p>{settingsMap.footer_text || `© ${new Date().getFullYear()} Impgames.ca - Experimental Retro Lab`}</p>
-            </footer>
+
         </div>
     );
 }

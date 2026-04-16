@@ -55,6 +55,11 @@ export default function FooterForm({ settingsMap }: { settingsMap: Record<string
         setIsSaved(false);
 
         const formData = new FormData(e.currentTarget);
+        
+        // Ensure checkboxes are sent even if unchecked (HTML default omits them)
+        if (!formData.has("show_social_footer")) formData.set("show_social_footer", "false");
+        if (!formData.has("show_social_bio")) formData.set("show_social_bio", "false");
+
         // Pack social links back into JSON
         formData.set("social_links", JSON.stringify(socialLinks));
         
@@ -93,8 +98,20 @@ export default function FooterForm({ settingsMap }: { settingsMap: Record<string
 
             <div className="admin-card">
                 <h3 style={{ marginBottom: '1.5rem', fontFamily: 'var(--font-bowlby)', fontSize: '1.2rem', color: 'var(--primary)', borderBottom: '2px solid #000', paddingBottom: '0.5rem' }}>Social Media & External Links</h3>
+                
+                <div style={{ background: 'rgba(0,0,0,0.05)', padding: '1.5rem', marginBottom: '2rem', border: '2px solid #000', display: 'flex', gap: '2rem' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', cursor: 'pointer', fontFamily: 'var(--font-jersey)', fontSize: '1.2rem' }}>
+                        <input type="checkbox" name="show_social_footer" defaultChecked={settingsMap.show_social_footer !== 'false'} style={{ width: '20px', height: '20px' }} />
+                        Show in Global Footer
+                    </label>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', cursor: 'pointer', fontFamily: 'var(--font-jersey)', fontSize: '1.2rem' }}>
+                        <input type="checkbox" name="show_social_bio" defaultChecked={settingsMap.show_social_bio !== 'false'} style={{ width: '20px', height: '20px' }} />
+                        Show on Bio Page
+                    </label>
+                </div>
+
                 <p style={{ fontSize: '0.85rem', opacity: 0.7, marginBottom: '2rem', fontFamily: 'var(--font-inter)' }}>
-                    These links will appear as badges in your footer and bio page. Use full URLs or just handles.
+                    Manage your external profiles below. Use full URLs or platform-specific handles.
                 </p>
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>

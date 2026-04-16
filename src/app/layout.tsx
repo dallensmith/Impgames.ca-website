@@ -1,10 +1,11 @@
 import { Inter, Jersey_15, Bowlby_One_SC } from "next/font/google";
 import "./globals.css";
+import type { Metadata } from "next";
 import Link from "next/link";
-
 import { auth } from "@/lib/auth/auth";
 import { headers } from "next/headers";
-import type { Metadata } from "next";
+import { getSettings } from "@/lib/data";
+import { formatSocialUrl } from "@/lib/social";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -27,8 +28,6 @@ export const metadata: Metadata = {
   title: "Impgames.ca | Custom NES Games",
   description: "Portfolio and release archive for NES homebrew games.",
 };
-
-import { getSettings } from "@/lib/data";
 
 export default async function RootLayout({
   children,
@@ -54,20 +53,61 @@ export default async function RootLayout({
           </nav>
         </header>
         <main>{children}</main>
-        <footer>
-          <div style={{ marginBottom: '1rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-            {settings.social_links && (() => {
+        
+        <footer className="main-footer">
+          <div className="footer-content">
+            <div className="footer-section">
+              <h4>Technical Specs</h4>
+              <ul className="footer-tech-list">
+                <li><span className="tech-label">Framework</span> <span className="tech-value">Next.js 15 (App Router)</span></li>
+                <li><span className="tech-label">Build Engine</span> <span className="tech-value">React 19 / TypeScript</span></li>
+                <li><span className="tech-label">Database</span> <span className="tech-value">SQLite (libSQL Core)</span></li>
+                <li><span className="tech-label">ORM Layer</span> <span className="tech-value">Drizzle v1.0</span></li>
+                <li><span className="tech-label">Assets</span> <span className="tech-value">BunnyCDN Edge</span></li>
+              </ul>
+            </div>
+
+            <div className="footer-section">
+              <h4>Quick Links</h4>
+              <div className="footer-links">
+                <Link href="/">Home</Link>
+                <Link href="/games">Game Archive</Link>
+                <Link href="/bio">The Lab / Bio</Link>
+                {session ? (
+                  <Link href="/admin">Lab Control</Link>
+                ) : (
+                  <Link href="/login">Secure Login</Link>
+                )}
+              </div>
+            </div>
+
+            {settings.show_social_footer !== 'false' && settings.social_links && (() => {
               try {
                 const links = JSON.parse(settings.social_links);
-                if (Array.isArray(links)) {
-                  return links.map((l, i) => (
-                    <a key={i} href={l.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--foreground)', opacity: 0.7 }}>{l.label}</a>
-                  ));
+                if (Array.isArray(links) && links.length > 0) {
+                  return (
+                    <div className="footer-section">
+                      <h4>Connect</h4>
+                      <div className="footer-links">
+                        {links.map((l: any, i: number) => (
+                          <a key={i} href={formatSocialUrl(l.url, l.platform)} target="_blank" rel="noopener noreferrer">{l.label}</a>
+                        ))}
+                      </div>
+                    </div>
+                  );
                 }
               } catch { return null; }
             })()}
           </div>
-          <p>{settings.footer_text || `© ${new Date().getFullYear()} Impgames. Built with Next.js & SQLite.`}</p>
+
+          <div className="footer-bottom">
+            <p>{settings.footer_text || `© ${new Date().getFullYear()} Impgames. Built for the Homebrew Community.`}</p>
+            <div className="footer-legal-links">
+              <Link href="/privacy">Privacy Policy</Link>
+              <Link href="/terms">Terms of Service</Link>
+              <Link href="/cookies">Cookies</Link>
+            </div>
+          </div>
         </footer>
       </body>
     </html>
