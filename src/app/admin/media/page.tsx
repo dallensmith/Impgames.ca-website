@@ -45,7 +45,7 @@ export default async function MediaLibraryPage() {
                             }}>
                                 SOURCE GAME:
                             </p>
-                            <p style={{ fontWeight: 'bold', fontSize: '1.1rem', marginBottom: '1.5rem', borderBottom: '2px solid rgba(0,0,0,0.1)', paddingBottom: '0.5rem' }}>
+                            <p style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '1.5rem', borderBottom: '2px solid rgba(0,0,0,0.1)', paddingBottom: '0.5rem' }}>
                                 {img.gameTitle || "Standalone Media"}
                             </p>
                         </div>
