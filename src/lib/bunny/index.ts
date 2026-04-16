@@ -53,7 +53,7 @@ export async function uploadToBunny(
             AccessKey: apiKey,
             "Content-Type": folder === "games" ? "application/zip" : "image/webp",
         },
-        body: finalFile,
+        body: new Uint8Array(finalFile),
     });
 
     if (!response.ok) {
