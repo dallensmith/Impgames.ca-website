@@ -28,6 +28,7 @@ db.exec(`
         version TEXT,
         release_date TEXT,
         changelog TEXT,
+        is_featured INTEGER DEFAULT 0,
         created_at INTEGER DEFAULT (strftime('%s', 'now')),
         updated_at INTEGER DEFAULT (strftime('%s', 'now'))
     );
@@ -57,6 +58,8 @@ db.exec(`
         email TEXT NOT NULL UNIQUE,
         email_verified INTEGER NOT NULL,
         image TEXT,
+        role TEXT DEFAULT 'user',
+        discord_id TEXT,
         created_at INTEGER NOT NULL,
         updated_at INTEGER NOT NULL
     );
@@ -97,6 +100,24 @@ db.exec(`
         updated_at INTEGER
     );
 `);
+
+// Migration logic to add columns if they don't exist
+const addColumnIfMissing = (table, column, definition) => {
+    try {
+        const info = db.prepare(`PRAGMA table_info(${table})`).all();
+        const exists = info.some(col => col.name === column);
+        if (!exists) {
+            console.log(`Adding missing column ${column} to table ${table}...`);
+            db.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
+        }
+    } catch (err) {
+        console.error(`Error checking/adding column ${column} to table ${table}:`, err);
+    }
+};
+
+addColumnIfMissing('posts', 'is_featured', 'INTEGER DEFAULT 0');
+addColumnIfMissing('user', 'role', "TEXT DEFAULT 'user'");
+addColumnIfMissing('user', 'discord_id', 'TEXT');
 
 console.log('Database initialized successfully!');
 db.close();
