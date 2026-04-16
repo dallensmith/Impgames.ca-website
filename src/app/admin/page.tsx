@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import Link from "next/link";
 import DBMaintenance from "@/components/DBMaintenance";
+import CloudflareStats from "@/components/CloudflareStats";
 
 export default async function AdminDashboard() {
     const postsCount = (await db.query.posts.findMany()).length;
@@ -27,7 +28,10 @@ export default async function AdminDashboard() {
                 </div>
             </div>
 
-            <DBMaintenance />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginTop: '3rem' }}>
+                <CloudflareStats />
+                <DBMaintenance />
+            </div>
         </div>
     );
 }

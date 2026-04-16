@@ -49,7 +49,7 @@ export default function DBMaintenance() {
     };
 
     return (
-        <div className="admin-card" style={{ marginTop: '3rem' }}>
+        <div className="admin-card">
             <h3 style={{ 
                 borderBottom: '2px solid var(--foreground)', 
                 paddingBottom: '0.5rem', 
