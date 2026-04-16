@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { galleryImages, posts } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
+import MediaManager from "@/components/MediaManager";
 
 export default async function MediaLibraryPage() {
     const images = await db.select({
@@ -14,15 +15,18 @@ export default async function MediaLibraryPage() {
 
     return (
         <div className="media-library">
-            <h2 style={{ 
-                marginBottom: '3rem', 
-                fontSize: '2rem', 
+            <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center', 
+                marginBottom: '3rem',
                 borderBottom: '4px solid var(--foreground)',
-                paddingBottom: '0.5rem',
-                display: 'inline-block'
+                paddingBottom: '1rem'
             }}>
-                Media Library
-            </h2>
+                <h2 style={{ fontSize: '2rem', margin: 0 }}>Media Library</h2>
+                
+                <MediaManager />
+            </div>
             
             <div className="gallery-grid">
                 {images.map(img => (
