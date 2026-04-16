@@ -15,9 +15,10 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Environment variables for build time
+# Disable telemetry during the build
 ENV NEXT_TELEMETRY_DISABLED 1
 
+# Build the project
 RUN npm run build
 
 # Production image, copy all the files and run next
@@ -26,6 +27,10 @@ WORKDIR /app
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
+
+# Create the /data directory and set permissions for the 'nextjs' user
+# This solves the SQLITE_CANTOPEN issue permanently
+RUN mkdir -p /data && chown -R node:node /data
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -40,10 +45,8 @@ RUN chown nextjs:nodejs .next
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-# Copy database initialization files if needed
-# We'll expect the DATABASE_URL to point to a persistent volume path like /app/data/sqlite.db
-RUN mkdir -p /app/data && chown nextjs:nodejs /app/data
+# Copy the initialization script
+COPY --from=builder --chown=nextjs:nodejs /app/public/init-db.js ./init-db.js
 
 USER nextjs
 
@@ -53,6 +56,5 @@ ENV PORT 3000
 # set hostname to localhost
 ENV HOSTNAME "0.0.0.0"
 
-# server.js is created by next build from the standalone output
-# https://nextjs.org/docs/pages/api-reference/next-config-js/output
-CMD ["node", "server.js"]
+# Run the initialization script and then start the app
+CMD node init-db.js && node server.js
