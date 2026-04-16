@@ -3,8 +3,13 @@ import { siteSettings, posts, galleryImages, gameVersions } from "./db/schema";
 import { eq, desc } from "drizzle-orm";
 
 export async function getSettings() {
-    const settings = await db.query.siteSettings.findMany();
-    return Object.fromEntries(settings.map(s => [s.key, s.value]));
+    try {
+        const settings = await db.query.siteSettings.findMany();
+        return Object.fromEntries(settings.map(s => [s.key, s.value]));
+    } catch (e) {
+        console.warn("Notice: Using default settings (tables may not exist yet).");
+        return {};
+    }
 }
 
 export async function getFeaturedGames() {
