@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "init-db": "node scripts/init-db.js"
+    "init-db": "node public/init-db.js"
   },
   "dependencies": {
     "better-auth": "^1.6.4",
