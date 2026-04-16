@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import Link from "next/link";
+import DBMaintenance from "@/components/DBMaintenance";
 
 export default async function AdminDashboard() {
     const postsCount = (await db.query.posts.findMany()).length;
@@ -25,6 +26,8 @@ export default async function AdminDashboard() {
                     <Link href="/admin/settings" className="button" style={{ fontSize: '0.8rem', padding: '0.5rem 1rem' }}>Edit Site Config</Link>
                 </div>
             </div>
+
+            <DBMaintenance />
         </div>
     );
 }
