@@ -1,0 +1,549 @@
+:root {
+  --background: #c9933f; /* Ochre/Mustard Yellow */
+  --foreground: #1a0f00; /* Dark Brown/Black */
+  --primary: #832714;    /* Deep Red */
+  --secondary: #4a2c0a;  /* Medium Brown */
+  --accent: #832714;     
+  --cartridge-bg: #8c8c8c;
+  --cartridge-border: #000;
+  --cartridge-label-bg: #fff;
+  --shadow: 12px 12px 0 rgba(0,0,0,0.3);
+  --border-radius: 0px; 
+  
+  /* High-Res Vintage Images from public/ */
+  --cart-top-img: url('/cartbgtop-2048x259.png');
+  --cart-middle-img: url('/cartbgmiddle-2048x294.png');
+  --cart-bottom-img: url('/cartbgbottom-2048x657.png');
+  --bg-texture: url('/stockvault-grunge-paper-background118901-scaled.jpg');
+}
+
+[data-theme='dark'] {
+  --background: #2a1b0a;
+  --foreground: #d2a679;
+  --primary: #a63a23;
+  --secondary: #5c3b1e;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  background-image: var(--bg-texture);
+  background-size: cover;
+  background-attachment: fixed;
+  background-blend-mode: multiply;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-bowlby), cursive; /* High-readability chunky woodcut style */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--primary);
+  text-shadow: 3px 3px 0px rgba(0,0,0,0.15);
+}
+
+header {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border-bottom: 8px double var(--foreground);
+  background-color: var(--background);
+  background-image: var(--bg-texture);
+  background-blend-mode: multiply;
+  background-size: cover;
+  margin-bottom: 0;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+header h1 {
+  font-size: 4rem;
+  border: 6px solid var(--foreground);
+  display: inline-block;
+  padding: 0.2rem 2rem;
+  background: var(--background);
+  position: relative;
+  letter-spacing: -2px;
+  transform: rotate(-1deg);
+  box-shadow: 10px 10px 0 var(--foreground);
+}
+
+header h1::before, header h1::after {
+  content: "★";
+  font-size: 2.5rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+}
+
+header h1::before { left: -50px; }
+header h1::after { right: -50px; }
+
+nav {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--foreground);
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  font-family: var(--font-jersey);
+  background: rgba(255,255,255,0.1);
+  border: 3px solid var(--foreground);
+  padding: 0.5rem 1.5rem;
+  transition: all 0.1s;
+  box-shadow: 4px 4px 0 var(--foreground);
+  position: relative;
+}
+
+nav a:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--foreground);
+}
+
+nav a:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0 var(--foreground);
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+footer {
+  text-align: center;
+  padding: 4rem 1rem;
+  font-size: 1rem;
+  border-top: 8px double var(--foreground);
+  margin-top: 4rem;
+  background-color: var(--background);
+  background-image: var(--bg-texture);
+  background-blend-mode: multiply;
+  background-size: cover;
+  font-family: var(--font-jersey);
+  text-transform: uppercase;
+  color: var(--foreground);
+}
+
+/* NES Cartridge Styles - Enhanced with Woodcut texture */
+.cartridge {
+  width: 800px;
+  margin: 0 auto 6rem auto;
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  filter: drop-shadow(20px 20px 0 rgba(0,0,0,0.3));
+}
+
+.cartridge-top {
+  width: 100%;
+  height: 102px; /* Calculated for 800px width */
+  background-image: var(--cart-top-img);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+}
+
+.cartridge-body {
+  width: 100%;
+  padding: 0; 
+  background-image: var(--cart-middle-img);
+  background-repeat: repeat-y;
+  background-size: 100% auto;
+  margin-top: -1px; /* Overlap to prevent gaps */
+}
+
+.cartridge-recessed-area {
+  margin-left: 34.4%;
+  margin-top: -99px;
+  width: 54.2%;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  position: relative;
+  box-shadow: inset 0 0 20px rgba(0,0,0,1);
+}
+
+.cartridge-title {
+    padding: 3rem 2rem 1.5rem 2rem;
+    color: var(--primary);
+    font-size: 2.2rem;
+    line-height: 1.1;
+    border-bottom: 2px solid #333;
+}
+
+.cartridge-label {
+  background: transparent;
+  color: #f0f0f0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cartridge-label-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    border-bottom: 4px solid #111;
+}
+
+.empty-label {
+    padding: 2rem;
+    text-align: center;
+    border: 2px dashed #333;
+    opacity: 0.5;
+}
+
+.cartridge-inner-content {
+    padding: 2rem;
+}
+
+.cartridge-footer {
+  width: 100%;
+  height: 256px; /* Calculated for 800px width */
+  background-image: var(--cart-bottom-img);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  margin-top: -1px;
+}
+
+.cartridge-bottom-pins {
+    display: none; /* Asset already has them */
+}
+
+.admin-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 2rem;
+  margin-bottom: 3rem;
+  border-bottom: 4px solid var(--foreground);
+}
+
+.admin-header h1 {
+  font-size: 2rem !important;
+  color: var(--primary) !important;
+  font-family: var(--font-bowlby) !important;
+  text-transform: uppercase !important;
+  margin: 0 !important;
+  text-shadow: none !important;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+  padding: 0 !important;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.admin-nav a {
+  font-size: 0.9rem !important;
+  padding: 0.5rem 1rem !important;
+  background: var(--background) !important;
+  border: 2px solid var(--foreground) !important;
+  box-shadow: 3px 3px 0 var(--foreground) !important;
+  font-family: var(--font-inter) !important;
+  font-weight: bold !important;
+}
+
+.admin-nav a:hover {
+  background: var(--foreground) !important;
+  color: var(--background) !important;
+}
+
+.admin-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(5px);
+  border: 4px solid var(--foreground);
+  padding: 3rem;
+  text-align: left;
+  box-shadow: 10px 10px 0 var(--foreground);
+  position: relative;
+}
+
+.admin-card.centered {
+  text-align: center;
+}
+
+.admin-card .stat {
+  font-size: 3rem;
+  font-family: var(--font-bowlby);
+  color: var(--primary);
+  margin: 1rem 0;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.admin-form label {
+  font-family: var(--font-bowlby), cursive;
+  font-size: 1rem;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+  letter-spacing: 0.5px;
+}
+
+.admin-form input, 
+.admin-form textarea, 
+.admin-form select {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  background: #fff;
+  border: 4px solid var(--foreground);
+  color: #000;
+  font-family: var(--font-inter);
+  transition: border-color 0.2s;
+}
+
+.admin-form input:focus, 
+.admin-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(131, 39, 20, 0.2);
+}
+
+.admin-form .upload-zone {
+  border: 4px dashed #000;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.admin-form button {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--primary);
+  color: #fff;
+  border: 4px solid #000;
+  font-family: var(--font-bowlby);
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 8px 8px 0 #000;
+  transition: all 0.1s;
+}
+
+.admin-form button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0 #000;
+}
+
+.admin-form button:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0 #000;
+}
+
+/* Starburst Elements (Like the red badges in the image) */
+.starburst {
+  background: var(--primary);
+  color: #fff;
+  padding: 10px 20px;
+  font-family: var(--font-jersey);
+  font-size: 1.5rem;
+  clip-path: polygon(
+    100% 50%, 90% 65%, 95% 80%, 80% 85%, 75% 100%, 60% 90%, 50% 100%, 40% 90%, 25% 100%, 20% 85%, 5% 80%, 10% 65%, 0% 50%, 10% 35%, 5% 20%, 20% 15%, 25% 0%, 40% 10%, 50% 0%, 60% 10%, 75% 0%, 80% 15%, 95% 20%, 90% 35%
+  );
+  display: inline-block;
+  line-height: 1;
+  text-align: center;
+}
+
+/* Button & interactive */
+button, .button {
+  background: var(--primary);
+  color: #fff;
+  border: 3px solid #000;
+  padding: 1rem 2rem;
+  font-family: 'Jersey 15', cursive;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 6px 6px 0 #000;
+  transition: all 0.1s;
+}
+
+button:active, .button:active {
+  box-shadow: 2px 2px 0 #000;
+  transform: translate(4px, 4px);
+}
+
+/* Integrated Cartridge Content Styling */
+.cartridge-inner-content .game-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #333;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+.cartridge-inner-content .game-meta strong {
+    color: var(--background) !important; /* Bright Ochre */
+}
+
+.cartridge-inner-content .meta-item {
+    color: #fff !important;
+    font-family: var(--font-jersey);
+    font-size: 1.3rem;
+}
+
+.cartridge-inner-content .game-description {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: 4rem;
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    white-space: pre-wrap;
+}
+
+/* Admin Status Badges */
+.status-badge {
+    padding: 4px 12px;
+    border: 2px solid #000;
+    font-family: var(--font-jersey);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.status-badge[data-status="published"] {
+    background: #27ae60;
+    color: #fff;
+}
+
+.status-badge[data-status="draft"] {
+    background: #f39c12;
+    color: #000;
+}
+
+.cartridge-inner-content .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.cartridge-inner-content .gallery-grid img {
+    border: 4px solid #333;
+}
+
+.cartridge-inner-content .game-changelog {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    padding: 1.5rem;
+}
+
+.cartridge-inner-content .game-download {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+/* Admin Layout Styles */
+.admin-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-header {
+    background: transparent;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+}
+
+.admin-header h1 {
+    font-size: 2.8rem;
+    margin: 0;
+    transform: rotate(-1deg);
+    border: 6px solid #000;
+    padding: 0.5rem 2rem;
+    background: var(--background);
+    box-shadow: 10px 10px 0 #000;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.admin-nav {
+    display: flex;
+    gap: 1.2rem;
+}
+
+.admin-nav a {
+    font-family: var(--font-jersey);
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: #000;
+    border: 3px solid #000;
+    padding: 0.5rem 1.2rem;
+    background: #fff;
+    box-shadow: 5px 5px 0 #000;
+    transition: all 0.1s;
+}
+
+.admin-nav a:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 #000;
+    background: var(--background);
+}
+
+.admin-nav a:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #000;
+}
+
+.admin-nav .public-link {
+    background: var(--primary);
+    color: #fff;
+}
+
+.admin-footer {
+    margin-top: auto;
+    padding: 3rem;
+    border-top: 8px double #000;
+    background: rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(5px);
+    text-align: center;
+    font-family: var(--font-inter);
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
