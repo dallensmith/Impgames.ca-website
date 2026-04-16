@@ -28,12 +28,12 @@ WORKDIR /app
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# Create the /data directory and set permissions for the 'nextjs' user
-# This solves the SQLITE_CANTOPEN issue permanently
-RUN mkdir -p /data && chown -R node:node /data
-
+# Create users first
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
+
+# Create the /data directory and set permissions for the 'nextjs' user
+RUN mkdir -p /data && chown -R 1001:1001 /data
 
 COPY --from=builder /app/public ./public
 
