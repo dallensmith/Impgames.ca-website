@@ -65,7 +65,7 @@ export async function GET() {
         zip.file("metadata.xml", xml);
 
         const zipBlob = await zip.generateAsync({ 
-            type: "nodebuffer",
+            type: "uint8array",
             compression: "DEFLATE",
             compressionOptions: { level: 6 }
         });
