@@ -22,25 +22,11 @@ export async function uploadToBunny(
     let finalFile = file;
     let finalFileName = fileName;
 
-    // Convert images to WebP and resize
+    // Convert images to WebP but DO NOT resize (preserves original aspect ratio)
     if (folder === "images" || folder === "screenshots") {
-        let pipeline = sharp(file);
+        const sharpInstance = sharp(file).rotate(); // Auto-rotate based on EXIF
 
-        if (folder === "images") {
-            // Standardize cover images to a high-res square NES-style label
-            pipeline = pipeline.resize(800, 800, {
-                fit: "cover",
-                position: "center",
-            });
-        } else {
-            // Cap screenshots at 1920px width for performance
-            pipeline = pipeline.resize(1920, null, {
-                withoutEnlargement: true,
-                fit: "inside"
-            });
-        }
-
-        finalFile = await pipeline.webp({ quality: 85 }).toBuffer();
+        finalFile = await sharpInstance.webp({ quality: 85 }).toBuffer();
         finalFileName = fileName.replace(/\.[^/.]+$/, "") + ".webp";
     }
 

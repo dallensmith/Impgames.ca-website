@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { saveSiteSettings } from "@/lib/actions";
+import WysiwygEditor from "./WysiwygEditor";
 
 export default function SettingsForm({ settingsMap }: { settingsMap: Record<string, string> }) {
     const [loading, setLoading] = useState(false);
@@ -35,7 +36,7 @@ export default function SettingsForm({ settingsMap }: { settingsMap: Record<stri
                 <p style={{ fontSize: '0.85rem', opacity: 0.7, marginBottom: '0.5rem', fontFamily: 'var(--font-inter)' }}>
                     Short pitch appearing on the home page hero section.
                 </p>
-                <textarea 
+                <WysiwygEditor 
                     id="homepage_intro"
                     name="homepage_intro" 
                     defaultValue={settingsMap.homepage_intro} 
@@ -62,11 +63,11 @@ export default function SettingsForm({ settingsMap }: { settingsMap: Record<stri
                 <p style={{ fontSize: '0.85rem', opacity: 0.7, marginBottom: '0.5rem', fontFamily: 'var(--font-inter)' }}>
                     Detailed developer biography and history.
                 </p>
-                <textarea 
+                <WysiwygEditor 
                     id="bio_content"
                     name="bio_content" 
                     defaultValue={settingsMap.bio_content} 
-                    style={{ minHeight: '250px' }} 
+                    style={{ minHeight: '280px' }} 
                     placeholder="I started developing NES games in..."
                 />
             </div>

@@ -144,7 +144,8 @@ footer {
 
 /* NES Cartridge Styles - Enhanced with Woodcut texture */
 .cartridge {
-  width: 800px;
+  width: 100%;
+  max-width: 800px;
   margin: 0 auto 6rem auto;
   background: transparent;
   border: none;
@@ -155,7 +156,7 @@ footer {
 
 .cartridge-top {
   width: 100%;
-  height: 102px; /* Calculated for 800px width */
+  aspect-ratio: 2048 / 259;
   background-image: var(--cart-top-img);
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -173,14 +174,14 @@ footer {
 
 .cartridge-recessed-area {
   margin-left: 34.4%;
-  margin-top: -99px;
+  margin-top: -12.4%; /* Responsive offset (~99px at 800px wide) */
   width: 54.2%;
   background: #000;
   display: flex;
   flex-direction: column;
   z-index: 10;
   position: relative;
-  box-shadow: inset 0 0 20px rgba(0,0,0,1);
+  box-shadow: none;
 }
 
 .cartridge-title {
@@ -192,27 +193,31 @@ footer {
 }
 
 .cartridge-label {
-  background: transparent;
+  background: #000;
   color: #f0f0f0;
   padding: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  position: relative;
+  line-height: 0;
 }
 
 .cartridge-label-img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    display: block;
-    border-bottom: 4px solid #111;
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 2px solid #111;
+  margin: 0;
 }
 
 .empty-label {
-    padding: 2rem;
+    padding: 4rem 2rem;
     text-align: center;
     border: 2px dashed #333;
     opacity: 0.5;
+    color: #fff;
 }
 
 .cartridge-inner-content {
@@ -221,7 +226,7 @@ footer {
 
 .cartridge-footer {
   width: 100%;
-  height: 256px; /* Calculated for 800px width */
+  aspect-ratio: 2048 / 657;
   background-image: var(--cart-bottom-img);
   background-size: 100% 100%;
   background-repeat: no-repeat;

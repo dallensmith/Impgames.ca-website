@@ -23,17 +23,61 @@ export default async function HomePage() {
             </section>
 
             <section className="featured-games">
-                <h3 style={{ textAlign: 'center', marginBottom: '2rem', fontSize: '2rem' }}>Recent Releases</h3>
-                <div className="games-grid">
+                <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+                    <h3 style={{ 
+                        display: 'inline-block',
+                        fontSize: '1.5rem', 
+                        fontFamily: 'var(--font-bowlby)', 
+                        color: 'var(--primary)',
+                        border: '4px solid var(--foreground)',
+                        padding: '0.4rem 1.5rem',
+                        background: 'var(--background)',
+                        boxShadow: '6px 6px 0 var(--foreground)',
+                        textTransform: 'uppercase',
+                        transform: 'rotate(-0.5deg)'
+                    }}>
+                        Recent Releases
+                    </h3>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '5rem', alignItems: 'center' }}>
                     {featuredGames.map(game => (
-                        <Link href={`/games/${game.slug}`} key={game.id} style={{ textDecoration: 'none', color: 'inherit' }}>
-                            <Cartridge title={game.title} labelImage={game.coverImage || undefined}>
-                                <p style={{ fontSize: '0.9rem' }}>{game.summary}</p>
-                                <div style={{ marginTop: '1rem', fontWeight: 'bold' }}>
-                                    Version {game.version || "1.0"}
-                                </div>
-                            </Cartridge>
-                        </Link>
+                        <div key={game.id} style={{ width: '100%', maxWidth: '800px' }}>
+                            <Link href={`/games/${game.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <Cartridge title={game.title} labelImage={game.coverImage || undefined}>
+                                    <div className="cartridge-inner-content">
+                                        <div 
+                                            style={{ 
+                                                fontSize: '1.2rem', 
+                                                lineHeight: '1.8', 
+                                                color: '#eee', 
+                                                marginBottom: '2rem',
+                                                fontFamily: 'var(--font-inter)'
+                                            }}
+                                            dangerouslySetInnerHTML={{ __html: game.summary }}
+                                        />
+                                        <div style={{ 
+                                            display: 'flex', 
+                                            justifyContent: 'space-between', 
+                                            alignItems: 'center',
+                                            borderTop: '2px solid #333',
+                                            paddingTop: '1.5rem'
+                                        }}>
+                                            <span className="starburst" style={{ fontSize: '1.1rem', padding: '8px 16px' }}>
+                                                v{game.version || "1.0"}
+                                            </span>
+                                            <span style={{ 
+                                                fontFamily: 'var(--font-jersey)', 
+                                                fontSize: '1.3rem', 
+                                                color: 'var(--background)',
+                                                letterSpacing: '1px'
+                                            }}>
+                                                VIEW FULL PROJECT &rarr;
+                                            </span>
+                                        </div>
+                                    </div>
+                                </Cartridge>
+                            </Link>
+                        </div>
                     ))}
                 </div>
                 {featuredGames.length === 0 && (

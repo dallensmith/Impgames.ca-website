@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { savePost } from "@/lib/actions";
 import { useRouter } from "next/navigation";
+import WysiwygEditor from "./WysiwygEditor";
 
 export default function PostForm({ post, gallery, versions: initialVersions }: { post?: any, gallery?: any[], versions?: any[] }) {
     const [loading, setLoading] = useState(false);
@@ -101,7 +102,7 @@ export default function PostForm({ post, gallery, versions: initialVersions }: {
                     <p style={{ fontSize: '0.85rem', opacity: 0.7, marginBottom: '0.5rem', fontFamily: 'var(--font-inter)' }}>
                         Short pitch for the games grid (1-2 sentences).
                     </p>
-                    <textarea id="summary" name="summary" defaultValue={post?.summary} placeholder="A brief overview of the game..." required />
+                    <WysiwygEditor id="summary" name="summary" defaultValue={post?.summary} placeholder="A brief overview of the game..." />
                 </div>
 
                 <div style={{ marginTop: '1.5rem' }}>
@@ -109,7 +110,7 @@ export default function PostForm({ post, gallery, versions: initialVersions }: {
                     <p style={{ fontSize: '0.85rem', opacity: 0.7, marginBottom: '0.5rem', fontFamily: 'var(--font-inter)' }}>
                         Comprehensive details about the game, world, and mechanics.
                     </p>
-                    <textarea id="content" name="content" defaultValue={post?.content} required style={{ height: '250px' }} />
+                    <WysiwygEditor id="content" name="content" defaultValue={post?.content} style={{ minHeight: '300px' }} />
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '1.5rem' }}>
@@ -172,7 +173,7 @@ export default function PostForm({ post, gallery, versions: initialVersions }: {
 
                             <div style={{ marginTop: '1rem' }}>
                                 <label style={{ fontSize: '0.8rem' }}>Version Notes / Changelog</label>
-                                <textarea name={`v_changelog_${index}`} defaultValue={v.changelog} style={{ height: '80px', fontSize: '0.9rem' }} placeholder="Bug fixes, new features..." />
+                                <WysiwygEditor name={`v_changelog_${index}`} defaultValue={v.changelog} style={{ minHeight: '100px' }} />
                             </div>
                         </div>
                     ))}
@@ -196,7 +197,7 @@ export default function PostForm({ post, gallery, versions: initialVersions }: {
                 
                 <div className="upload-zone" style={{ border: '4px dashed var(--foreground)', padding: '2rem', background: 'rgba(255,255,255,0.3)', marginBottom: '2rem' }}>
                     <label style={{ color: 'var(--primary)' }}>Primary Cover Image (Cartridge Label)</label>
-                    <p style={{ fontSize: '0.85rem', opacity: 0.7, marginBottom: '1rem', fontFamily: 'var(--font-inter)' }}>This image will be cropped to a 4:3 aspect ratio.</p>
+                    <p style={{ fontSize: '0.85rem', opacity: 0.7, marginBottom: '1rem', fontFamily: 'var(--font-inter)' }}>This image will fill the width of the cartridge label area while preserving its full height.</p>
                     
                     {post?.coverImage && !coverCleared && (
                         <div style={{ marginBottom: '1.5rem', position: 'relative', display: 'inline-block' }}>
@@ -245,7 +246,7 @@ export default function PostForm({ post, gallery, versions: initialVersions }: {
             <section style={{ marginTop: '3rem' }}>
                <label htmlFor="changelog">Admin Private Notes</label>
                <p style={{ fontSize: '0.85rem', opacity: 0.7, marginBottom: '0.5rem', fontFamily: 'var(--font-inter)' }}>Internal notes or overall project status (Not shown to public).</p>
-               <textarea id="changelog" name="changelog" defaultValue={post?.changelog} style={{ height: '100px' }} placeholder="Current development stage, to-do items..." />
+               <WysiwygEditor id="changelog" name="changelog" defaultValue={post?.changelog} style={{ minHeight: '120px' }} />
             </section>
 
             <div style={{ marginTop: '4rem', padding: '2rem', background: 'var(--foreground)', color: '#fff' }}>

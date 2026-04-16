@@ -46,9 +46,10 @@ export default async function BioPage() {
                              <div style={{ marginBottom: '1rem', color: 'var(--primary)', fontSize: '0.9rem', textTransform: 'uppercase', fontFamily: 'var(--font-bowlby)', letterSpacing: '2px' }}>
                                 OUR STORY
                              </div>
-                            <p style={{ whiteSpace: 'pre-wrap', fontSize: '1.25rem', lineHeight: '1.9', color: 'var(--foreground)', opacity: 0.9 }}>
-                                {settings.bio_content || "This creator is still writing their legend..."}
-                            </p>
+                            <div 
+                                style={{ fontSize: '1.25rem', lineHeight: '1.9', color: 'var(--foreground)', opacity: 0.9 }}
+                                dangerouslySetInnerHTML={{ __html: settings.bio_content || "This creator is still writing their legend..." }}
+                            />
                         </div>
 
                         {settings.show_social_bio !== 'false' && settings.social_links && (() => {

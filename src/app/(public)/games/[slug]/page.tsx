@@ -27,9 +27,11 @@ export default async function SingleGamePage({ params }: { params: { slug: strin
                         </div>
                     </div>
 
-                    <div className="game-description" style={{ fontSize: '1.15rem', lineHeight: '1.8', color: '#fff', marginBottom: '3rem', whiteSpace: 'pre-wrap' }}>
-                        <p>{game.content}</p>
-                    </div>
+                    <div 
+                        className="game-description" 
+                        style={{ fontSize: '1.15rem', lineHeight: '1.8', color: '#fff', marginBottom: '3rem' }}
+                        dangerouslySetInnerHTML={{ __html: game.content }}
+                    />
 
                     {game.gallery.length > 0 && (
                         <ScreenshotGallery images={game.gallery} title={game.title} />
