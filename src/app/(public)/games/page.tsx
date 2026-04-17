@@ -6,20 +6,21 @@ export default async function GamesPage() {
     const games = await getAllGames();
 
     return (
-        <div>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '3rem', textAlign: 'center' }}>Games Archive</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '6rem', alignItems: 'center' }}>
+        <div className="wide-container">
+            <div className="section-title-container">
+                <h2 className="section-title">Games Archive</h2>
+            </div>
+            <div className="cartridge-card-grid">
                 {games.map(game => (
-                    <div key={game.id} style={{ width: '100%', maxWidth: '800px' }}>
+                    <div key={game.id} className="cartridge-card-mode">
                         <Link href={`/games/${game.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                             <Cartridge title={game.title} labelImage={game.coverImage || undefined}>
                                 <div className="cartridge-inner-content">
                                     <div 
+                                        className="game-summary"
                                         style={{ 
-                                            fontSize: '1.2rem', 
-                                            lineHeight: '1.8', 
+                                            lineHeight: '1.5', 
                                             color: '#eee', 
-                                            marginBottom: '2rem',
                                             fontFamily: 'var(--font-inter)'
                                         }}
                                         dangerouslySetInnerHTML={{ __html: game.summary }}
@@ -29,19 +30,29 @@ export default async function GamesPage() {
                                         justifyContent: 'space-between', 
                                         alignItems: 'center',
                                         borderTop: '2px solid #333',
-                                        paddingTop: '1.5rem'
+                                        paddingTop: '1rem'
                                     }}>
-                                        <span className="starburst" style={{ fontSize: '1.0rem', padding: '6px 14px' }}>
-                                            v{game.version || "1.0"}
-                                        </span>
-                                        <span style={{ 
+                                        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                                            <span className="starburst" style={{ fontSize: '0.9rem', padding: '6px 12px' }}>
+                                                v{game.version || "1.0"}
+                                            </span>
+                                            <span style={{ 
+                                                fontFamily: 'var(--font-jersey)', 
+                                                fontSize: '1rem', 
+                                                color: 'rgba(255,255,255,0.4)',
+                                                textTransform: 'uppercase',
+                                                letterSpacing: '1px'
+                                            }}>
+                                                {game.releaseDate || "DATE TBD"}
+                                            </span>
+                                        </div>
+                                        <span className="view-project-label" style={{ 
                                             fontFamily: 'var(--font-jersey)', 
                                             fontSize: '1.1rem', 
-                                            color: 'rgba(255,255,255,0.6)',
-                                            textTransform: 'uppercase',
+                                            color: 'var(--background)',
                                             letterSpacing: '1px'
                                         }}>
-                                            {game.releaseDate || "Date TBD"}
+                                            DETAILS &rarr;
                                         </span>
                                     </div>
                                 </div>

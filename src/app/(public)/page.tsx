@@ -7,7 +7,7 @@ export default async function HomePage() {
     const featuredGames = await getFeaturedGames();
 
     return (
-        <div className="home-page">
+        <div className="home-page wide-container">
             <section className="hero" style={{ textAlign: 'center', marginBottom: '4rem', position: 'relative' }}>
                 <div style={{ margin: '0 auto', position: 'relative', display: 'inline-block' }}>
                     <img 
@@ -23,34 +23,22 @@ export default async function HomePage() {
             </section>
 
             <section className="featured-games">
-                <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-                    <h3 style={{ 
-                        display: 'inline-block',
-                        fontSize: '1.5rem', 
-                        fontFamily: 'var(--font-bowlby)', 
-                        color: 'var(--primary)',
-                        border: '4px solid var(--foreground)',
-                        padding: '0.4rem 1.5rem',
-                        background: 'var(--background)',
-                        boxShadow: '6px 6px 0 var(--foreground)',
-                        textTransform: 'uppercase',
-                        transform: 'rotate(-0.5deg)'
-                    }}>
+                <div className="section-title-container">
+                    <h3 className="section-title">
                         Recent Releases
                     </h3>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '5rem', alignItems: 'center' }}>
+                <div className="cartridge-card-grid">
                     {featuredGames.map(game => (
-                        <div key={game.id} style={{ width: '100%', maxWidth: '800px' }}>
+                        <div key={game.id} className="cartridge-card-mode">
                             <Link href={`/games/${game.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                 <Cartridge title={game.title} labelImage={game.coverImage || undefined}>
                                     <div className="cartridge-inner-content">
                                         <div 
+                                            className="game-summary"
                                             style={{ 
-                                                fontSize: '1.2rem', 
-                                                lineHeight: '1.8', 
+                                                lineHeight: '1.6', 
                                                 color: '#eee', 
-                                                marginBottom: '2rem',
                                                 fontFamily: 'var(--font-inter)'
                                             }}
                                             dangerouslySetInnerHTML={{ __html: game.summary }}
@@ -60,18 +48,18 @@ export default async function HomePage() {
                                             justifyContent: 'space-between', 
                                             alignItems: 'center',
                                             borderTop: '2px solid #333',
-                                            paddingTop: '1.5rem'
+                                            paddingTop: '1rem'
                                         }}>
-                                            <span className="starburst" style={{ fontSize: '1.1rem', padding: '8px 16px' }}>
+                                            <span className="starburst" style={{ fontSize: '0.9rem', padding: '6px 12px' }}>
                                                 v{game.version || "1.0"}
                                             </span>
-                                            <span style={{ 
+                                            <span className="view-project-label" style={{ 
                                                 fontFamily: 'var(--font-jersey)', 
-                                                fontSize: '1.3rem', 
+                                                fontSize: '1.1rem', 
                                                 color: 'var(--background)',
                                                 letterSpacing: '1px'
                                             }}>
-                                                VIEW FULL PROJECT &rarr;
+                                                VIEW &rarr;
                                             </span>
                                         </div>
                                     </div>

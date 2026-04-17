@@ -16,7 +16,7 @@ export async function getFeaturedGames() {
     return await db.query.posts.findMany({
         where: eq(posts.status, "published"),
         orderBy: [desc(posts.createdAt)],
-        limit: 3
+        limit: 2
     });
 }
 
