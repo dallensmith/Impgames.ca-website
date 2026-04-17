@@ -10,19 +10,9 @@ export default function Cartridge({ title, children, labelImage }: CartridgeProp
     return (
         <>
             {title && (
-                <h2 className="external-cartridge-title" style={{ 
-                    textAlign: 'center', 
-                    fontSize: '2.8rem', 
-                    marginBottom: '1rem', 
-                    color: 'var(--primary)',
-                    fontFamily: 'var(--font-bowlby)',
-                    textTransform: 'uppercase',
-                    textShadow: '3px 3px 0px rgba(0,0,0,0.15)',
-                    letterSpacing: '-1px',
-                    lineHeight: '1.1'
-                }}>
-                    {title}
-                </h2>
+                <div className="section-title-container" style={{ marginBottom: '1.5rem' }}>
+                    <h2 className="section-title">{title}</h2>
+                </div>
             )}
             <div className="cartridge">
                 <div className="cartridge-top"></div>

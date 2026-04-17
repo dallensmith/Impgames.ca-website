@@ -17,8 +17,8 @@ export default async function HomePage() {
                     />
                 </div>
 
-                <div style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1.4rem', border: '4px solid var(--foreground)', padding: '1.5rem', background: 'rgba(255,255,255,0.1)' }}>
-                    <p>{settings.homepage_intro || "Creating modern games for classic hardware. Explore my NES homebrew projects below."}</p>
+                <div className="hero-intro">
+                    <p className="hero-intro-text">{settings.homepage_intro || "Creating modern games for classic hardware. Explore my NES homebrew projects below."}</p>
                 </div>
             </section>
 

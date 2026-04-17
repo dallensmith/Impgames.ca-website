@@ -12,7 +12,9 @@ export default async function SingleGamePage({ params }: { params: { slug: strin
 
     return (
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-            <Link href="/games" style={{ marginBottom: '2rem', display: 'inline-block', color: 'var(--accent)' }}>&larr; Back to Archive</Link>
+            <Link href="/games" className="back-button">
+                <span>&larr;</span> Back to Archive
+            </Link>
 
             <Cartridge title={game.title} labelImage={game.coverImage || undefined}>
                 <div className="cartridge-inner-content" style={{ color: '#fff' }}>
@@ -78,6 +80,12 @@ export default async function SingleGamePage({ params }: { params: { slug: strin
                     ) : null}
                 </div>
             </Cartridge>
+            
+            <div style={{ marginTop: '3rem', textAlign: 'center' }}>
+                <Link href="/games" className="back-button">
+                    <span>&larr;</span> Back to Archive
+                </Link>
+            </div>
         </div>
     );
 }
