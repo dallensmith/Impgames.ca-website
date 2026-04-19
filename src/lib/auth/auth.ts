@@ -2,6 +2,7 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "../db";
 import * as schema from "../db/schema";
+import { headers } from "next/headers";
 
 export const auth = betterAuth({
     database: drizzleAdapter(db, {
@@ -29,3 +30,19 @@ export const auth = betterAuth({
         },
     },
 });
+
+export async function checkIsAdmin() {
+    const session = await auth.api.getSession({
+        headers: await headers()
+    });
+    if (!session) return false;
+
+    const superUserId = process.env.SUPER_USER_ID;
+    const siteOwnerId = process.env.SITE_OWNER_ID;
+
+    const account = await db.query.account.findFirst({
+        where: (acc, { eq, and }) => and(eq(acc.userId, session.user.id), eq(acc.providerId, "discord"))
+    });
+
+    return account && (account.accountId === superUserId || account.accountId === siteOwnerId);
+}

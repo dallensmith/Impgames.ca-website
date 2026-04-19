@@ -8,7 +8,7 @@ export default async function BioPage() {
         <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 1rem' }}>
             <div style={{ padding: '3rem', background: 'rgba(255, 255, 255, 0.75)', backdropFilter: 'blur(10px)', border: '6px solid var(--foreground)', boxShadow: '15px 15px 0 rgba(0,0,0,0.2)', position: 'relative' }}>
                 
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2.5rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
                     
                     <div style={{ position: 'relative' }}>
                         {settings.bio_image ? (
@@ -40,12 +40,9 @@ export default async function BioPage() {
                         }}>
                             {settings.developer_name || "The Developer"}
                         </h2>
-                        <div style={{ height: '6px', width: '80px', background: 'var(--foreground)', margin: '0 auto 3rem auto' }}></div>
+                        <div style={{ height: '6px', width: '80px', background: 'var(--foreground)', margin: '0 auto 1.5rem auto' }}></div>
                         
                         <div style={{ textAlign: 'left', position: 'relative', maxWidth: '650px', margin: '0 auto' }}>
-                             <div style={{ marginBottom: '1rem', color: 'var(--primary)', fontSize: '0.9rem', textTransform: 'uppercase', fontFamily: 'var(--font-bowlby)', letterSpacing: '2px' }}>
-                                OUR STORY
-                             </div>
                             <div 
                                 style={{ fontSize: '1.25rem', lineHeight: '1.9', color: 'var(--foreground)', opacity: 0.9 }}
                                 dangerouslySetInnerHTML={{ __html: settings.bio_content || "This creator is still writing their legend..." }}

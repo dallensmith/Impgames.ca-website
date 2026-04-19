@@ -1,20 +1,18 @@
 import React from "react";
 
+import Link from "next/link";
+
 interface CartridgeProps {
     title?: string;
     children: React.ReactNode;
     labelImage?: string;
+    href?: string;
+    titleExtra?: React.ReactNode;
 }
 
-export default function Cartridge({ title, children, labelImage }: CartridgeProps) {
-    return (
-        <>
-            {title && (
-                <div className="section-title-container" style={{ marginBottom: '1.5rem' }}>
-                    <h2 className="section-title">{title}</h2>
-                </div>
-            )}
-            <div className="cartridge">
+export default function Cartridge({ title, children, labelImage, href, titleExtra }: CartridgeProps) {
+    const cartridgeElement = (
+        <div className="cartridge">
                 <div className="cartridge-top"></div>
                 <div className="cartridge-body">
                     <div className="cartridge-recessed-area">
@@ -39,7 +37,26 @@ export default function Cartridge({ title, children, labelImage }: CartridgeProp
                 <div className="cartridge-footer">
                     <div className="cartridge-bottom-pins"></div>
                 </div>
-            </div>
-        </>
+        </div>
+    );
+
+    return (
+        <div className="cartridge-wrapper">
+            {title && (
+                <div className="section-title-container" style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
+                    <h2 className="section-title" style={{ margin: 0 }}>
+                         {href ? <Link href={href} style={{ textDecoration: 'none', color: 'inherit' }}>{title}</Link> : title}
+                    </h2>
+                    {titleExtra}
+                </div>
+            )}
+            {href ? (
+                <Link href={href} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
+                    {cartridgeElement}
+                </Link>
+            ) : (
+                cartridgeElement
+            )}
+        </div>
     );
 }

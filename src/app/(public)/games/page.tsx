@@ -1,9 +1,11 @@
 import { getAllGames } from "@/lib/data";
 import Cartridge from "@/components/Cartridge";
 import Link from "next/link";
+import { checkIsAdmin } from "@/lib/auth/auth";
 
 export default async function GamesPage() {
     const games = await getAllGames();
+    const isAdmin = await checkIsAdmin();
 
     return (
         <div className="wide-container">
@@ -13,10 +15,34 @@ export default async function GamesPage() {
             <div className="cartridge-card-grid">
                 {games.map(game => (
                     <div key={game.id} className="cartridge-card-mode">
-                        <Link href={`/games/${game.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                            <Cartridge title={game.title} labelImage={game.coverImage || undefined}>
-                                <div className="cartridge-inner-content">
-                                    <div 
+                        <Cartridge 
+                            title={game.title} 
+                            labelImage={game.coverImage || undefined}
+                            href={`/games/${game.slug}`}
+                            titleExtra={
+                                isAdmin ? (
+                                    <Link 
+                                        href={`/admin/posts/${game.id}`} 
+                                        style={{ 
+                                            background: 'var(--accent)', 
+                                            color: '#fff', 
+                                            padding: '0.2rem 0.6rem', 
+                                            fontSize: '0.7rem', 
+                                            textDecoration: 'none', 
+                                            fontFamily: 'var(--font-inter)',
+                                            border: '2px solid #000',
+                                            borderRadius: '4px',
+                                            textTransform: 'uppercase',
+                                            fontWeight: 'bold'
+                                        }}
+                                    >
+                                        Edit
+                                    </Link>
+                                ) : null
+                            }
+                        >
+                            <div className="cartridge-inner-content">
+                                <div 
                                         className="game-summary"
                                         style={{ 
                                             lineHeight: '1.5', 
@@ -56,8 +82,7 @@ export default async function GamesPage() {
                                         </span>
                                     </div>
                                 </div>
-                            </Cartridge>
-                        </Link>
+                        </Cartridge>
                     </div>
                 ))}
             </div>

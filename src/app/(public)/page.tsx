@@ -1,10 +1,12 @@
 import { getSettings, getFeaturedGames } from "@/lib/data";
 import Cartridge from "@/components/Cartridge";
 import Link from "next/link";
+import { checkIsAdmin } from "@/lib/auth/auth";
 
 export default async function HomePage() {
     const settings = await getSettings();
     const featuredGames = await getFeaturedGames();
+    const isAdmin = await checkIsAdmin();
 
     return (
         <div className="home-page wide-container">
@@ -31,9 +33,33 @@ export default async function HomePage() {
                 <div className="cartridge-card-grid">
                     {featuredGames.map(game => (
                         <div key={game.id} className="cartridge-card-mode">
-                            <Link href={`/games/${game.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                <Cartridge title={game.title} labelImage={game.coverImage || undefined}>
-                                    <div className="cartridge-inner-content">
+                            <Cartridge 
+                                title={game.title} 
+                                labelImage={game.coverImage || undefined}
+                                href={`/games/${game.slug}`}
+                                titleExtra={
+                                    isAdmin ? (
+                                        <Link 
+                                            href={`/admin/posts/${game.id}`} 
+                                            style={{ 
+                                                background: 'var(--accent)', 
+                                                color: '#fff', 
+                                                padding: '0.2rem 0.6rem', 
+                                                fontSize: '0.7rem', 
+                                                textDecoration: 'none', 
+                                                fontFamily: 'var(--font-inter)',
+                                                border: '2px solid #000',
+                                                borderRadius: '4px',
+                                                textTransform: 'uppercase',
+                                                fontWeight: 'bold'
+                                            }}
+                                        >
+                                            Edit
+                                        </Link>
+                                    ) : null
+                                }
+                            >
+                                <div className="cartridge-inner-content">
                                         <div 
                                             className="game-summary"
                                             style={{ 
@@ -63,8 +89,7 @@ export default async function HomePage() {
                                             </span>
                                         </div>
                                     </div>
-                                </Cartridge>
-                            </Link>
+                            </Cartridge>
                         </div>
                     ))}
                 </div>
