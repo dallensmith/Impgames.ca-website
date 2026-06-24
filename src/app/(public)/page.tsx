@@ -12,10 +12,10 @@ export default async function HomePage() {
         <div className="home-page wide-container">
             <section className="hero" style={{ textAlign: 'center', marginBottom: '4rem', position: 'relative' }}>
                 <div style={{ margin: '0 auto', position: 'relative', display: 'inline-block' }}>
-                    <img 
-                        src="/frontpage.png" 
-                        alt="Impgames Front Page" 
-                        style={{ maxWidth: '100%', height: 'auto' }} 
+                    <img
+                        src="https://cdn.impgames.ca/images/hero.webp"
+                        alt="Impgames Front Page"
+                        style={{ maxWidth: '100%', height: 'auto' }}
                     />
                 </div>
 
@@ -27,7 +27,7 @@ export default async function HomePage() {
             <section className="featured-games">
                 <div className="section-title-container">
                     <h3 className="section-title">
-                        Recent Releases
+                        Showcase
                     </h3>
                 </div>
                 <div className="cartridge-card-grid">
