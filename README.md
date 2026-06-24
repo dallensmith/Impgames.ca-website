@@ -1,6 +1,6 @@
 # 🕹️ Impgames.ca - The Virtual NES Creative Lab
 
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![Drizzle](https://img.shields.io/badge/Drizzle-ORM-C5F74F?style=for-the-badge&logo=drizzle)](https://orm.drizzle.team/)
 [![Better Auth](https://img.shields.io/badge/Better--Auth-Security-000000?style=for-the-badge)](https://better-auth.com/)
 [![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite)](https://sqlite.org/)
@@ -35,9 +35,9 @@ Unlike standard portfolios, Impgames.ca utilizes a custom **Segmented Cartridge 
 
 ## 💻 Tech Stack & Architecture
 
-- **Frontend**: Next.js 15 (App Router) + React 19 (Server Components)
+- **Frontend**: Next.js 16 (App Router) + React 19 (Server Components)
 - **Styling**: Vanilla CSS (Tailored Design Tokens, Glassmorphism, CSS Variables)
-- **Database**: Drizzle ORM + SQLite (libSQL for production)
+- **Database**: Drizzle ORM + SQLite (better-sqlite3)
 - **Security**: Better Auth with Discord OAuth Provider
 - **Storage**: BunnyCDN Edge Storage Integration for media and binaries
 - **Server Actions**: Full standard-based mutations for all administrative tasks
