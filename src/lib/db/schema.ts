@@ -65,6 +65,7 @@ export const posts = sqliteTable("posts", {
 	zipUrl: text("zip_url"),
 	status: text("status").$type<"draft" | "published">().default("draft"),
 	isFeatured: integer("is_featured", { mode: "boolean" }).default(false),
+	showcaseOrder: integer("showcase_order"),
 	createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
 	updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
 });

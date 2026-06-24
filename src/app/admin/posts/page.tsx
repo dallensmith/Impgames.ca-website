@@ -4,6 +4,7 @@ import { posts } from "@/lib/db/schema";
 import { desc } from "drizzle-orm";
 
 import DeletePostButton from "@/components/DeletePostButton";
+import ShowcaseToggle from "@/components/ShowcaseToggle";
 
 export default async function AdminPostsList() {
     const list = await db.query.posts.findMany({
@@ -26,6 +27,7 @@ export default async function AdminPostsList() {
                             <th style={{ padding: '1.2rem', textAlign: 'left', fontFamily: 'var(--font-bowlby)', fontSize: '0.9rem', textTransform: 'uppercase' }}>Game Title</th>
                             <th style={{ padding: '1.2rem', textAlign: 'left', fontFamily: 'var(--font-bowlby)', fontSize: '0.9rem', textTransform: 'uppercase' }}>Status</th>
                             <th style={{ padding: '1.2rem', textAlign: 'left', fontFamily: 'var(--font-bowlby)', fontSize: '0.9rem', textTransform: 'uppercase' }}>Version</th>
+                            <th style={{ padding: '1.2rem', textAlign: 'left', fontFamily: 'var(--font-bowlby)', fontSize: '0.9rem', textTransform: 'uppercase' }}>Showcase</th>
                             <th style={{ padding: '1.2rem', textAlign: 'right', fontFamily: 'var(--font-bowlby)', fontSize: '0.9rem', textTransform: 'uppercase' }}>Actions</th>
                         </tr>
                     </thead>
@@ -39,6 +41,9 @@ export default async function AdminPostsList() {
                                     </span>
                                 </td>
                                 <td style={{ padding: '1rem', fontFamily: 'var(--font-inter)', fontWeight: 'bold' }}>{post.version || 'v1.0.0'}</td>
+                                <td style={{ padding: '1rem' }}>
+                                    <ShowcaseToggle postId={post.id} currentShowcaseOrder={post.showcaseOrder} />
+                                </td>
                                 <td style={{ padding: '1rem', textAlign: 'right' }}>
                                     <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end', alignItems: 'center' }}>
                                         <Link href={`/admin/posts/${post.id}`} style={{ color: 'var(--primary)', fontWeight: 'bold', textDecoration: 'none', borderBottom: '2px solid var(--primary)' }}>Edit</Link>
@@ -50,7 +55,7 @@ export default async function AdminPostsList() {
                         ))}
                         {list.length === 0 && (
                             <tr>
-                                <td colSpan={4} style={{ padding: '4rem', textAlign: 'center', opacity: 0.5, fontStyle: 'italic' }}>
+                                <td colSpan={5} style={{ padding: '4rem', textAlign: 'center', opacity: 0.5, fontStyle: 'italic' }}>
                                     No games found in the archive.
                                 </td>
                             </tr>

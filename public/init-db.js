@@ -116,6 +116,7 @@ const addColumnIfMissing = (table, column, definition) => {
 };
 
 addColumnIfMissing('posts', 'is_featured', 'INTEGER DEFAULT 0');
+addColumnIfMissing('posts', 'showcase_order', 'INTEGER');
 addColumnIfMissing('user', 'role', "TEXT DEFAULT 'user'");
 addColumnIfMissing('user', 'discord_id', 'TEXT');
 

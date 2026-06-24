@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { uploadToBunny } from "./bunny";
 import { eq } from "drizzle-orm";
 import { v4 as uuidv4 } from 'uuid';
+import { checkIsAdmin } from "./auth/auth";
 
 export async function savePost(formData: FormData) {
     const id = formData.get("id") as string || uuidv4();
@@ -193,5 +194,34 @@ export async function saveSiteSettings(formData: FormData) {
 
     revalidatePath("/");
     revalidatePath("/bio");
+    return { success: true };
+}
+
+export async function toggleShowcase(postId: string, slot: number | null) {
+    const isAdmin = await checkIsAdmin();
+    if (!isAdmin) {
+        return { success: false, error: "Unauthorized" };
+    }
+
+    if (slot === null) {
+        // Remove post from showcase
+        await db.update(posts)
+            .set({ showcaseOrder: null })
+            .where(eq(posts.id, postId));
+    } else if (slot === 1 || slot === 2) {
+        // Clear any existing post already occupying this slot
+        await db.update(posts)
+            .set({ showcaseOrder: null })
+            .where(eq(posts.showcaseOrder, slot));
+
+        // Assign the target post to the requested slot
+        await db.update(posts)
+            .set({ showcaseOrder: slot })
+            .where(eq(posts.id, postId));
+    }
+
+    revalidatePath('/');
+    revalidatePath('/admin/posts');
+
     return { success: true };
 }
