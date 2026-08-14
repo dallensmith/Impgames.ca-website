@@ -166,6 +166,29 @@ footer {
     margin: 0;
 }
 
+.hero-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.hero-left, .hero-right {
+    width: 100%;
+}
+
+.hero-left .cartridge {
+    margin-bottom: 0;
+}
+
+@media (max-width: 992px) {
+    .hero-columns {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+}
+
 .hero-intro {
     max-width: 800px;
     margin: 3rem auto;

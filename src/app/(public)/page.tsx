@@ -7,16 +7,86 @@ export default async function HomePage() {
     const settings = await getSettings();
     const featuredGames = await getFeaturedGames();
     const isAdmin = await checkIsAdmin();
+    const slot1Game = featuredGames.length > 0 ? featuredGames[0] : null;
+
+    const renderGameCartridge = (game: typeof featuredGames[number]) => (
+        <div key={game.id} className="cartridge-card-mode">
+            <Cartridge 
+                title={game.title} 
+                labelImage={game.coverImage || undefined}
+                href={`/games/${game.slug}`}
+                titleExtra={
+                    isAdmin ? (
+                        <Link 
+                            href={`/admin/posts/${game.id}`} 
+                            style={{ 
+                                background: 'var(--accent)', 
+                                color: '#fff', 
+                                padding: '0.2rem 0.6rem', 
+                                fontSize: '0.7rem', 
+                                textDecoration: 'none', 
+                                fontFamily: 'var(--font-inter)',
+                                border: '2px solid #000',
+                                borderRadius: '4px',
+                                textTransform: 'uppercase',
+                                fontWeight: 'bold'
+                            }}
+                        >
+                            Edit
+                        </Link>
+                    ) : null
+                }
+            >
+                <div className="cartridge-inner-content">
+                    <div 
+                        className="game-summary"
+                        style={{ 
+                            lineHeight: '1.6', 
+                            color: '#eee', 
+                            fontFamily: 'var(--font-inter)'
+                        }}
+                        dangerouslySetInnerHTML={{ __html: game.summary }}
+                    />
+                    <div style={{ 
+                        display: 'flex', 
+                        justifyContent: 'space-between', 
+                        alignItems: 'center',
+                        borderTop: '2px solid #333',
+                        paddingTop: '1rem'
+                    }}>
+                        <span className="starburst" style={{ fontSize: '0.9rem', padding: '6px 12px' }}>
+                            v{game.version || "1.0"}
+                        </span>
+                        <span className="view-project-label" style={{ 
+                            fontFamily: 'var(--font-jersey)', 
+                            fontSize: '1.1rem', 
+                            color: 'var(--background)',
+                            letterSpacing: '1px'
+                        }}>
+                            VIEW &rarr;
+                        </span>
+                    </div>
+                </div>
+            </Cartridge>
+        </div>
+    );
 
     return (
         <div className="home-page wide-container">
-            <section className="hero" style={{ textAlign: 'center', marginBottom: '4rem', position: 'relative' }}>
-                <div style={{ margin: '0 auto', position: 'relative', display: 'inline-block' }}>
-                    <img
-                        src="https://cdn.impgames.ca/images/hero.webp"
-                        alt="Impgames Front Page"
-                        style={{ maxWidth: '100%', height: 'auto' }}
-                    />
+            <section className="hero" style={{ marginBottom: '4rem', position: 'relative' }}>
+                <div className="hero-columns">
+                    <div className="hero-left">
+                        {slot1Game && renderGameCartridge(slot1Game)}
+                    </div>
+                    <div className="hero-right" style={{ textAlign: 'center' }}>
+                        <div style={{ margin: '0 auto', position: 'relative', display: 'inline-block' }}>
+                            <img
+                                src="https://cdn.impgames.ca/images/hero.webp"
+                                alt="Impgames Front Page"
+                                style={{ maxWidth: '100%', height: 'auto' }}
+                            />
+                        </div>
+                    </div>
                 </div>
 
                 <div className="hero-intro">
@@ -31,67 +101,7 @@ export default async function HomePage() {
                     </h3>
                 </div>
                 <div className="cartridge-card-grid">
-                    {featuredGames.map(game => (
-                        <div key={game.id} className="cartridge-card-mode">
-                            <Cartridge 
-                                title={game.title} 
-                                labelImage={game.coverImage || undefined}
-                                href={`/games/${game.slug}`}
-                                titleExtra={
-                                    isAdmin ? (
-                                        <Link 
-                                            href={`/admin/posts/${game.id}`} 
-                                            style={{ 
-                                                background: 'var(--accent)', 
-                                                color: '#fff', 
-                                                padding: '0.2rem 0.6rem', 
-                                                fontSize: '0.7rem', 
-                                                textDecoration: 'none', 
-                                                fontFamily: 'var(--font-inter)',
-                                                border: '2px solid #000',
-                                                borderRadius: '4px',
-                                                textTransform: 'uppercase',
-                                                fontWeight: 'bold'
-                                            }}
-                                        >
-                                            Edit
-                                        </Link>
-                                    ) : null
-                                }
-                            >
-                                <div className="cartridge-inner-content">
-                                        <div 
-                                            className="game-summary"
-                                            style={{ 
-                                                lineHeight: '1.6', 
-                                                color: '#eee', 
-                                                fontFamily: 'var(--font-inter)'
-                                            }}
-                                            dangerouslySetInnerHTML={{ __html: game.summary }}
-                                        />
-                                        <div style={{ 
-                                            display: 'flex', 
-                                            justifyContent: 'space-between', 
-                                            alignItems: 'center',
-                                            borderTop: '2px solid #333',
-                                            paddingTop: '1rem'
-                                        }}>
-                                            <span className="starburst" style={{ fontSize: '0.9rem', padding: '6px 12px' }}>
-                                                v{game.version || "1.0"}
-                                            </span>
-                                            <span className="view-project-label" style={{ 
-                                                fontFamily: 'var(--font-jersey)', 
-                                                fontSize: '1.1rem', 
-                                                color: 'var(--background)',
-                                                letterSpacing: '1px'
-                                            }}>
-                                                VIEW &rarr;
-                                            </span>
-                                        </div>
-                                    </div>
-                            </Cartridge>
-                        </div>
-                    ))}
+                    {featuredGames.map(game => renderGameCartridge(game))}
                 </div>
                 {featuredGames.length === 0 && (
                     <p style={{ textAlign: 'center', opacity: 0.5 }}>No games released yet. Stay tuned!</p>
