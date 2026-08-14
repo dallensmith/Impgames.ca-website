@@ -171,21 +171,46 @@ footer {
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
     align-items: center;
+    justify-items: center;
     margin-bottom: 2rem;
 }
 
-.hero-left, .hero-right {
+.hero-left {
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-left .cartridge-card-mode {
+    width: 100%;
+    max-width: 500px;
 }
 
 .hero-left .cartridge {
     margin-bottom: 0;
 }
 
+.hero-right {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-right img {
+    max-width: 100%;
+    height: auto;
+}
+
 @media (max-width: 992px) {
     .hero-columns {
         grid-template-columns: 1fr;
         gap: 3rem;
+    }
+
+    .hero-left .cartridge-card-mode {
+        max-width: 600px;
     }
 }
 
