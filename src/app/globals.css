@@ -168,23 +168,14 @@ footer {
 
 .hero-columns {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: 44% 56%;
+    gap: 2.5rem;
     align-items: center;
-    justify-items: center;
     margin-bottom: 2rem;
 }
 
 .hero-left {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.hero-left .cartridge-card-mode {
-    width: 100%;
-    max-width: 500px;
 }
 
 .hero-left .cartridge {
@@ -193,24 +184,21 @@ footer {
 
 .hero-right {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
 }
 
 .hero-right img {
-    max-width: 100%;
+    width: 100%;
+    max-width: 720px;
     height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 @media (max-width: 992px) {
     .hero-columns {
         grid-template-columns: 1fr;
         gap: 3rem;
-    }
-
-    .hero-left .cartridge-card-mode {
-        max-width: 600px;
     }
 }
 

@@ -78,14 +78,11 @@ export default async function HomePage() {
                     <div className="hero-left">
                         {slot1Game && renderGameCartridge(slot1Game)}
                     </div>
-                    <div className="hero-right" style={{ textAlign: 'center' }}>
-                        <div style={{ margin: '0 auto', position: 'relative', display: 'inline-block' }}>
-                            <img
-                                src="https://cdn.impgames.ca/images/hero.webp"
-                                alt="Impgames Front Page"
-                                style={{ maxWidth: '100%', height: 'auto' }}
-                            />
-                        </div>
+                    <div className="hero-right">
+                        <img
+                            src="https://cdn.impgames.ca/images/hero.webp"
+                            alt="Impgames Front Page"
+                        />
                     </div>
                 </div>
 
